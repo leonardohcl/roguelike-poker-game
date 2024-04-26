@@ -2,9 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@atoms/*": ["src/components/01_atoms/*"],
+      "@molecules/*": ["src/components/02_molecules/*"],
+      "@organisms/*": ["src/components/03_organisms/*"]
     },
-    
+
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",

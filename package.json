@@ -15,6 +15,7 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
+    "@frctl/fractal": "^1.5.15",
     "@vitejs/plugin-vue": "^5.0.4",
     "sass": "^1.75.0",
     "typescript": "^5.2.2",

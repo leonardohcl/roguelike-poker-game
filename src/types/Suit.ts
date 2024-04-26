@@ -1,11 +1,11 @@
-export type Suit = "spades" | "hearts" | "clubs" | "diamonds";
+export type SuitType = "spades" | "hearts" | "clubs" | "diamonds";
 
-const SPADES: Suit = "spades";
-const HEARTS: Suit = "hearts";
-const CLUBS: Suit = "clubs";
-const DIAMONDS: Suit = "diamonds";
+const SPADES: SuitType = "spades";
+const HEARTS: SuitType = "hearts";
+const CLUBS: SuitType = "clubs";
+const DIAMONDS: SuitType = "diamonds";
 
-const all = () => [SPADES, HEARTS, CLUBS, DIAMONDS] as Suit[]
+const all = () => [SPADES, HEARTS, CLUBS, DIAMONDS] as SuitType[]
 
 export default {
   SPADES,
