@@ -12,4 +12,11 @@ export default defineConfig({
       "@molecules": path.resolve(__dirname, "./src/components/02_molecules"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/styles/global.scss";`
+      }
+    }
+  }
 });

@@ -1,17 +1,19 @@
-export type SuitType = "spades" | "hearts" | "clubs" | "diamonds";
+import Dictionary from "./Disctionary";
 
-const SPADES: SuitType = "spades";
-const HEARTS: SuitType = "hearts";
-const CLUBS: SuitType = "clubs";
-const DIAMONDS: SuitType = "diamonds";
+export interface Suit {
+  order: number;
+  name: string;
+}
 
-const all = () => [SPADES, HEARTS, CLUBS, DIAMONDS] as SuitType[]
+export const SPADES: Suit = { order: 1, name: "spades" };
+export const HEARTS: Suit = { order: 2, name: "hearts" };
+export const CLUBS: Suit = { order: 3, name: "clubs" };
+export const DIAMONDS: Suit = { order: 4, name: "diamonds" };
 
-export default {
-  SPADES,
-  HEARTS,
-  CLUBS,
-  DIAMONDS,
-  all
-};
+const dict: Dictionary<Suit> = {
+  SPADES, HEARTS, CLUBS, DIAMONDS
+} 
 
+export const allSuits = () => Object.keys(dict).map(key => dict[key]);
+
+export default dict;
