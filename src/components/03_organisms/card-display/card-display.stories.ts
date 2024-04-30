@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 import CardDisplay from "./card-display.vue";
 import { randomPlayingCard } from "@/utils/random";
+import { fn } from "@storybook/test";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 const meta = {
@@ -11,7 +12,10 @@ const meta = {
     cards: { control: "number" },
   },
   args: {
+    maxSelected: 5,
     cards: randomPlayingCard(8),
+    "onSelect-card": fn(),
+    "onDeselect-card": fn(),
   },
 } satisfies Meta<typeof CardDisplay>;
 

@@ -1,4 +1,4 @@
-import Dictionary from "./Disctionary";
+import Dictionary from "./Dictionary";
 
 export interface Suit {
   order: number;

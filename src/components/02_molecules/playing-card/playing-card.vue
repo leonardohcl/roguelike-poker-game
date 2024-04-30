@@ -31,6 +31,9 @@ defineProps({
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  user-select: none;
+
   .rank {
     font-size: 40px;
     font-weight: bolder;

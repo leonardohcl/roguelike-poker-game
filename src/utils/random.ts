@@ -1,4 +1,4 @@
-import Card from "@/model/Card";
+import { CardFactory } from "@/types/Card";
 import { allRanks } from "@/types/Rank";
 import { allSuits } from "@/types/Suit";
 
@@ -17,8 +17,12 @@ export function randomRank() {
   return randomListElement(allRanks());
 }
 
+export function shuffle<T>(list: Array<T>) {
+  return list.sort(() => Math.random() - 0.5)
+}
+
 export function randomPlayingCard(amount = 1) {
   return new Array(amount)
     .fill(0)
-    .map(() => new Card(randomSuit(), randomRank()));
+    .map(() => CardFactory.new(randomSuit(), randomRank()));
 }

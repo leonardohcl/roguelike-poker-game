@@ -3,11 +3,12 @@ $hearts: red;
 $clubs: black;
 $diamonds: red;
 
-$card-height: 160px;
-
 $colors: (
-    'spades': $spades,
-    'hearts': $hearts,
-    'clubs': $clubs,
-    'diamonds': $diamonds
-)
+  "spades": $spades,
+  "hearts": $hearts,
+  "clubs": $clubs,
+  "diamonds": $diamonds,
+);
+
+$card-height: 160px;
+$card-selected-displacement: 20px;
