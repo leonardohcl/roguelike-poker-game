@@ -1,11 +1,13 @@
 import Dealer from "@/model/Dealer";
 import Card from "@/types/Card";
+import { remove } from "@/utils/array";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useTableStore = defineStore("table", () => {
   const deck = ref(Dealer.newDeck());
   const hand = ref<Card[]>([]);
+  const play = ref<Card[]>([]);
   const playingHand = ref<Card[]>([]);
   const played = ref<Card[]>([]);
   const discarded = ref<Card[]>([]);
@@ -32,14 +34,23 @@ export const useTableStore = defineStore("table", () => {
   }
 
   function removeFromPlayingHand(card: Card) {
-    const idx = playingHand.value.indexOf(card);
-    if (idx < 0) return;
-    playingHand.value.splice(idx, 1);
+    remove(playingHand.value, card)
+  }
+
+  function playSelected() {
+    while(playingHand.value.length > 0) {
+      const card = playingHand.value.shift()!
+      remove(hand.value, card)
+      card.selected = false
+      play.value.push(card)
+    }
+    
   }
 
   return {
     deck,
     hand,
+    play,
     played,
     discarded,
     playingHand,
@@ -47,5 +58,6 @@ export const useTableStore = defineStore("table", () => {
     reset,
     addToPlayingHand,
     removeFromPlayingHand,
+    playSelected,
   };
 });

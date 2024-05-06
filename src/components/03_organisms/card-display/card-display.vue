@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import PlayingCard from "@/components/02_molecules/playing-card/playing-card.vue";
 import Card from "@/types/Card";
-import { ref } from "vue";
+import { computed } from "vue";
 const { cards, maxSelected } = defineProps({
   cards: {
     type: Array<Card>,
@@ -18,17 +18,17 @@ const emit = defineEmits<{
   "deselect-card": [card: Card];
 }>();
 
-const selectedCount = ref(0);
+const selectedCount = computed(
+  () => cards.filter((card) => card.selected === true).length
+);
 
 function toggleSelected(card: Card) {
   if (card.selected) {
     card.selected = false;
-    selectedCount.value--;
     emit("deselect-card", card);
   } else {
     if (selectedCount.value >= maxSelected) return;
     card.selected = true;
-    selectedCount.value++;
     emit("select-card", card);
   }
 }
