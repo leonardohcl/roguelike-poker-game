@@ -1,6 +1,8 @@
 import Card, { CardFactory } from "@/types/Card";
 import { allRanks } from "@/types/Rank";
 import { allSuits } from "@/types/Suit";
+import { sleep } from "@/utils/async";
+import { ANIMATION_DURATION } from "@/utils/config";
 import { randomInt, shuffle } from "@/utils/random";
 
 export default class Dealer {
@@ -30,5 +32,22 @@ export default class Dealer {
         return deck;
       }, [])
     );
+  }
+
+  static async handToPlayer(totalCards: number) {
+    await sleep(ANIMATION_DURATION / totalCards);
+  } 
+
+  static async placeOnTable(totalCards: number) {
+    await sleep(ANIMATION_DURATION / totalCards);
+  }
+
+  static async removeFromTable(totalCards: number) {
+    await sleep(ANIMATION_DURATION / totalCards);
+  }
+
+  static async score(card: Card) {
+    card.selected = true;
+    await sleep(ANIMATION_DURATION);
   }
 }

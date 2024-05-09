@@ -7,7 +7,7 @@ const table = useTableStore()
 
 <template>
   <div class="sidebar">
-    <PokerHandDisplay :hand-name="table.activeHand?.name"/>
+    <PokerHandDisplay :hand-name="table.activeHand?.name ?? table.tableHand?.name"/>
   </div>
 </template>
 

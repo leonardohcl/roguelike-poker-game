@@ -26,8 +26,18 @@ function getSuits(cards: Card[]) {
   return Object.keys(grouped);
 }
 
-function hasNextRank(rank:Rank, cards: Card[]) {
-  return !!cards.find(card => card.rank.symbol === rank.next)
+function getRankGroupsBySize(cards: Card[], size: number) {
+  const grouped = groupByRank(cards);
+  const groups: Card[][] = [];
+  forEachKey(grouped, (_, group) => {
+    if (group.length === size) groups.push(group);
+  });
+
+  return groups;
+}
+
+function hasNextRank(rank: Rank, cards: Card[]) {
+  return !!cards.find((card) => card.rank.symbol === rank.next);
 }
 
 export default interface PokerHand {
@@ -57,7 +67,7 @@ export const PAIR: PokerHand = {
     return hasSameRankCount(cards, 2);
   },
   scoredCards(cards) {
-    return [];
+    return getRankGroupsBySize(cards, 2)[0];
   },
 };
 
@@ -75,7 +85,8 @@ export const TWO_PAIR: PokerHand = {
     return pairCount > 1;
   },
   scoredCards(cards) {
-    return [];
+    const pairs = getRankGroupsBySize(cards, 2);
+    return [...pairs[0], ...pairs[1]];
   },
 };
 
@@ -88,7 +99,7 @@ export const THREE_OF_KIND: PokerHand = {
     return hasSameRankCount(cards, 3);
   },
   scoredCards(cards) {
-    return [];
+    return getRankGroupsBySize(cards, 3)[0];
   },
 };
 
@@ -99,13 +110,13 @@ export const STRAIGHT: PokerHand = {
   matches: (cards) => {
     if (cards.length < 5) return false;
     let hasNext = 0;
-    cards.forEach(card => {
-      if(hasNextRank(card.rank, cards)) hasNext++;
-    })
+    cards.forEach((card) => {
+      if (hasNextRank(card.rank, cards)) hasNext++;
+    });
     return hasNext === 4;
   },
   scoredCards(cards) {
-    return [];
+    return cards;
   },
 };
 
@@ -116,10 +127,10 @@ export const FLUSH: PokerHand = {
   matches: (cards) => {
     if (cards.length < 5) return false;
     const suites = getSuits(cards);
-    return suites.length === 1
+    return suites.length === 1;
   },
   scoredCards(cards) {
-    return [];
+    return cards;
   },
 };
 
@@ -132,7 +143,7 @@ export const FULL_HOUSE: PokerHand = {
     return hasSameRankCount(cards, 2) && hasSameRankCount(cards, 3);
   },
   scoredCards(cards) {
-    return [];
+    return cards;
   },
 };
 
@@ -145,7 +156,7 @@ export const FOUR_OF_KIND: PokerHand = {
     return hasSameRankCount(cards, 4);
   },
   scoredCards(cards) {
-    return [];
+    return getRankGroupsBySize(cards, 4)[0];
   },
 };
 
@@ -158,7 +169,7 @@ export const STRAIGHT_FLUSH: PokerHand = {
     return FLUSH.matches(cards) && STRAIGHT.matches(cards);
   },
   scoredCards(cards) {
-    return [];
+    return cards;
   },
 };
 
