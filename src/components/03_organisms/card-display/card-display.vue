@@ -2,7 +2,7 @@
 import PlayingCard from "@/components/02_molecules/playing-card/playing-card.vue";
 import Card from "@/types/Card";
 import { computed } from "vue";
-const { cards, maxSelected } = defineProps({
+const { blockSelection, cards, maxSelected } = defineProps({
   cards: {
     type: Array<Card>,
     default: () => [],
@@ -10,6 +10,10 @@ const { cards, maxSelected } = defineProps({
   maxSelected: {
     type: Number,
     default: 1,
+  },
+  blockSelection: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -22,12 +26,16 @@ const selectedCount = computed(
   () => cards.filter((card) => card.selected === true).length
 );
 
-function toggleSelected(card: Card) {
+const canSelect = computed(() => {
+  return selectedCount.value < maxSelected;
+});
+
+const toggleSelected = (card: Card) => {
   if (card.selected) {
     card.selected = false;
     emit("deselect-card", card);
   } else {
-    if (selectedCount.value >= maxSelected) return;
+    if (!canSelect.value) return;
     card.selected = true;
     emit("select-card", card);
   }
@@ -43,7 +51,7 @@ function toggleSelected(card: Card) {
         :class="{
           selected: card.selected,
         }"
-        @click="toggleSelected(card)"
+        @click="!blockSelection && toggleSelected(card)"
       />
     </div>
   </div>

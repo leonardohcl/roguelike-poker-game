@@ -2,35 +2,25 @@
 import PokerButton from "@/components/01_atoms/poker-button/poker-button.vue";
 import CardDisplay from "@/components/03_organisms/card-display/card-display.vue";
 import { useTableStore } from "@/stores/table";
-import Card from "@/types/Card";
 import { computed } from "vue";
 
 const table = useTableStore();
 
-const handleSelect = (card: Card) => {
-  table.addToPlayingHand(card);
-};
-
-const handleDeselect = (card: Card) => {
-  table.removeFromPlayingHand(card);
-};
-
 const disablePlay = computed(
-  () => table.playingHand.length === 0 || table.play.length > 0
+  () => table.selected.length === 0 || table.onTable.length > 0
 );
 </script>
 
 <template>
   <div class="playing-table">
     <div class="playing-table__play-area">
-      <CardDisplay :cards="table.play" :max-selected="0" />
+      <CardDisplay :cards="table.onTable" block-selection />
     </div>
     <div class="playing-table__hand">
       <CardDisplay
         :cards="table.hand"
         :max-selected="5"
-        @select-card="handleSelect"
-        @deselect-card="handleDeselect"
+        :block-selection="table.onTable.length > 0"
       />
 
       <div class="playing-table__actions">
