@@ -10,6 +10,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       "@atoms": path.resolve(__dirname, "./src/components/01_atoms"),
       "@molecules": path.resolve(__dirname, "./src/components/02_molecules"),
+      "@organisms": path.resolve(__dirname, "./src/components/03_organisms"),
+      "@templates": path.resolve(__dirname, "./src/components/04_templates"),
     },
   },
   css: {

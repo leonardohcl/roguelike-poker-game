@@ -7,7 +7,7 @@ export interface Rank {
   symbol: string;
 }
 
-export const ACE: Rank = { value: 13, symbol: "A", name: "ace" };
+export const ACE: Rank = { value: 13, symbol: "A", name: "ace", next: "" };
 export const KING: Rank = {
   value: 10,
   symbol: "K",
@@ -80,6 +80,8 @@ export const TWO: Rank = {
   name: "two",
   next: THREE.symbol,
 };
+
+ACE.next = TWO.symbol
 
 const dict: Dictionary<Rank> = {
   TWO,
